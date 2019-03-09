@@ -76,16 +76,10 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fa fa-circle-o nav-icon"></i>
-                                <p>Active Page</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fa fa-circle-o nav-icon"></i>
-                                <p>Inactive Page</p>
-                            </a>
+                            <router-link to="/users" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>Users</p>
+                            </router-link>
                         </li>
                     </ul>
                 </li>
