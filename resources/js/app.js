@@ -24,6 +24,16 @@ Vue.use(VueProgressBar, {
     height: "3px"
 });
 
+import Swal from "sweetalert2";
+window.Swal = Swal;
+const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000
+});
+window.Toast = Toast;
+
 const routes = [
     {
         path: "/dashboard",
