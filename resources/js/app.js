@@ -11,6 +11,11 @@ window.Vue = require("vue");
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
+import { Form, HasError, AlertError } from "vform";
+window.Form = Form;
+Vue.component(HasError.name, HasError);
+Vue.component(AlertError.name, AlertError);
+
 const routes = [
     {
         path: "/dashboard",
