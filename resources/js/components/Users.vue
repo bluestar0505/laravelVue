@@ -18,13 +18,15 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Type</th>
+                    <th>Registered At</th>
                     <th>Modify</th>
                   </tr>
-                  <tr>
-                    <td>183</td>
-                    <td>John Doe</td>
-                    <td>11-7-2014</td>
-                    <td><span class="tag tag-success">Approved</span></td>
+                  <tr v-for="user in users" :key="user.id">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.type }}</td>
+                    <td>{{ user.created_at }}</td>
                     <td>
                       <a href="#"><i class="fas fa-edit"></i></a>
                       /
@@ -82,7 +84,7 @@
                   <has-error :form="form" field="password"></has-error>
                 </div>
                 <div class="form-group">
-                  <label>Password</label>
+                  <label>Confirm Password</label>
                   <input v-model="form.password_confirmation" type="password" name="password_confirmation" id="password_confirmation" class="form-control" :class="{ 'is-invalid': form.errors.has('password_confirmation') }">
                   <has-error :form="form" field="password_confirmation"></has-error>
                 </div>
@@ -103,6 +105,7 @@
     export default {
       data() {
         return {
+          users: {},
           form: new Form({
             name: '',
             email: '',
@@ -115,13 +118,16 @@
         }
       },
       methods: {
+        loadUsers() {
+          //this.form.get('api/user').then(({ data }) => console.log(data));
+          axios.get('api/user').then(({ data }) => (this.users = data.data));
+        },
         createUser() {
-          this.form.post('api/user')
-            .then(({ data }) => console.log(data))
+          this.form.post('api/user').then(({ data }) => console.log(data));
         }
       },
-      mounted() {
-          console.log('Component mounted.')
+      created() {
+        this.loadUsers();
       }
     }
 </script>
