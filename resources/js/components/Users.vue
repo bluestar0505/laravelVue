@@ -81,6 +81,11 @@
                   <input v-model="form.password" type="password" name="password" id="password" class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
                   <has-error :form="form" field="password"></has-error>
                 </div>
+                <div class="form-group">
+                  <label>Password</label>
+                  <input v-model="form.password_confirmation" type="password" name="password_confirmation" id="password_confirmation" class="form-control" :class="{ 'is-invalid': form.errors.has('password_confirmation') }">
+                  <has-error :form="form" field="password_confirmation"></has-error>
+                </div>
               </div>
 
               <div class="modal-footer">
@@ -102,6 +107,7 @@
             name: '',
             email: '',
             password: '',
+            password_confirmation: '',
             type: '',
             bio: '',
             photo: ''

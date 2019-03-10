@@ -1975,6 +1975,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1982,6 +1987,7 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         email: '',
         password: '',
+        password_confirmation: '',
         type: '',
         bio: '',
         photo: ''
@@ -38423,6 +38429,57 @@ var render = function() {
                         _vm._v(" "),
                         _c("has-error", {
                           attrs: { form: _vm.form, field: "password" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", [_vm._v("Password")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.password_confirmation,
+                              expression: "form.password_confirmation"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.form.errors.has(
+                              "password_confirmation"
+                            )
+                          },
+                          attrs: {
+                            type: "password",
+                            name: "password_confirmation",
+                            id: "password_confirmation"
+                          },
+                          domProps: { value: _vm.form.password_confirmation },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "password_confirmation",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: {
+                            form: _vm.form,
+                            field: "password_confirmation"
+                          }
                         })
                       ],
                       1
