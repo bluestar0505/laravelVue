@@ -2008,26 +2008,32 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     createUser: function createUser() {
+      var _this2 = this;
+
       this.$Progress.start();
-      this.form.post('api/user').then(function (_ref2) {
-        var data = _ref2.data;
-        return console.log(data);
+      this.form.post('api/user').then(function (data) {
+        console.log(data);
+        Fire.$emit('afterCreate');
+        $('#addNew').modal('hide');
+        Toast.fire({
+          type: 'success',
+          title: 'User Created in successfully'
+        });
+
+        _this2.$Progress.finish();
+      }).catch(function (error) {
+        _this2.$Progress.finish();
+
+        console.log(error);
       });
-      Fire.$emit('afterCreate');
-      $('#addNew').modal('hide');
-      Toast.fire({
-        type: 'success',
-        title: 'User Created in successfully'
-      });
-      this.$Progress.finish();
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     this.loadUsers();
     Fire.$on('afterCreate', function () {
-      _this2.loadUsers();
+      _this3.loadUsers();
     }); // setInterval(() => this.loadUsers(), 3000);
   }
 });

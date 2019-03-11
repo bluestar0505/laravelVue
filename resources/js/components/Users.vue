@@ -124,14 +124,21 @@
         },
         createUser() {
           this.$Progress.start();
-          this.form.post('api/user').then(({ data }) => console.log(data));
-          Fire.$emit('afterCreate');
-          $('#addNew').modal('hide');
-          Toast.fire({
-            type: 'success',
-            title: 'User Created in successfully'
-          });
-          this.$Progress.finish();
+          this.form.post('api/user')
+            .then(( data ) => {
+              console.log(data);
+              Fire.$emit('afterCreate');
+              $('#addNew').modal('hide');
+              Toast.fire({
+                type: 'success',
+                title: 'User Created in successfully'
+              });
+              this.$Progress.finish();
+            })
+            .catch((error) => {
+              this.$Progress.finish();
+              console.log(error);
+            });
         }
       },
       created() {
