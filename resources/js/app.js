@@ -46,6 +46,10 @@ const routes = [
         component: require("./components/Users.vue").default
     },
     {
+        path: "/developer",
+        component: require("./components/Developer.vue").default
+    },
+    {
         path: "/profile",
         component: require("./components/Profile.vue").default
     }
@@ -78,6 +82,21 @@ Vue.filter("myDate", function(date) {
 Vue.component(
     "example-component",
     require("./components/ExampleComponent.vue").default
+);
+
+Vue.component(
+    "passport-clients",
+    require("./components/passport/Clients.vue").default
+);
+
+Vue.component(
+    "passport-authorized-clients",
+    require("./components/passport/AuthorizedClients.vue").default
+);
+
+Vue.component(
+    "passport-personal-access-tokens",
+    require("./components/passport/PersonalAccessTokens.vue").default
 );
 
 /**
