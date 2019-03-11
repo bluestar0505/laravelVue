@@ -47,7 +47,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 v-show="!editMode" class="modal-title" id="addNewLabel">Add New</h5>
-              <h5 v-show="editMode" class="modal-title" id="addNewLabel">Update {{ edit_user.name }}'s Info</h5>
+              <h5 v-show="editMode" class="modal-title" id="addNewLabel">Update {{ form.name }}'s Info</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -108,9 +108,9 @@
       data() {
         return {
           editMode: false,
-          edit_user: {},
           users: {},
           form: new Form({
+            id: '',
             name: '',
             email: '',
             password: '',
@@ -125,12 +125,13 @@
         createModal() {
           this.editMode = false;
           this.form.reset();
+          this.form.clear ();
           $('#addNew').modal('show');
         },
         editModal(user) {
           this.editMode = true;
-          this.edit_user = user;
           this.form.reset();
+          this.form.clear ();
           $('#addNew').modal('show');
           this.form.fill(user);
         },
@@ -151,12 +152,28 @@
               });
               this.$Progress.finish();
             }).catch((error) => {
-              this.$Progress.finish();
+              this.$Progress.fail();
               console.log(error);
             });
         },
         updateUser() {
-          console.log("Updating User Data.");
+          this.$Progress.start();
+          this.form.put('api/user/' + this.form.id)
+            .then((data)=> {
+              $('#addNew').modal('hide');
+              Swal.fire(
+                'Updated!',
+                'User data has been updated.',
+                'success'
+              );
+              this.$Progress.finish();
+              Fire.$emit('reloadTable');
+            }).catch(()=>{
+              $('#addNew').modal('hide');
+              this.$Progress.fail();
+              swal("Update Failed!", "There was something wrong.", "warning");
+            });
+          //console.log("Updating User Data.");
         },
         deleteUser(user_id){
           Swal.fire({
@@ -174,13 +191,13 @@
                 .then((data)=> {
                   Swal.fire(
                     'Deleted!',
-                    'Your file has been deleted.',
+                    'User has been deleted.',
                     'success'
                   )
                   Fire.$emit('reloadTable');
 
                 }).catch(()=>{
-                  swal("Failed!", "There was something wrong.", "warning");
+                  swal("Delete Failed!", "There was something wrong.", "warning");
                 });
             }
           });

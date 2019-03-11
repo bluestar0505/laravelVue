@@ -1988,9 +1988,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       editMode: false,
-      edit_user: {},
       users: {},
       form: new Form({
+        id: '',
         name: '',
         email: '',
         password: '',
@@ -2005,12 +2005,13 @@ __webpack_require__.r(__webpack_exports__);
     createModal: function createModal() {
       this.editMode = false;
       this.form.reset();
+      this.form.clear();
       $('#addNew').modal('show');
     },
     editModal: function editModal(user) {
       this.editMode = true;
-      this.edit_user = user;
       this.form.reset();
+      this.form.clear();
       $('#addNew').modal('show');
       this.form.fill(user);
     },
@@ -2038,16 +2039,32 @@ __webpack_require__.r(__webpack_exports__);
 
         _this2.$Progress.finish();
       }).catch(function (error) {
-        _this2.$Progress.finish();
+        _this2.$Progress.fail();
 
         console.log(error);
       });
     },
     updateUser: function updateUser() {
-      console.log("Updating User Data.");
+      var _this3 = this;
+
+      this.$Progress.start();
+      this.form.put('api/user/' + this.form.id).then(function (data) {
+        $('#addNew').modal('hide');
+        Swal.fire('Updated!', 'User data has been updated.', 'success');
+
+        _this3.$Progress.finish();
+
+        Fire.$emit('reloadTable');
+      }).catch(function () {
+        $('#addNew').modal('hide');
+
+        _this3.$Progress.fail();
+
+        swal("Update Failed!", "There was something wrong.", "warning");
+      }); //console.log("Updating User Data.");
     },
     deleteUser: function deleteUser(user_id) {
-      var _this3 = this;
+      var _this4 = this;
 
       Swal.fire({
         title: 'Are you sure?',
@@ -2060,22 +2077,22 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         //send delete request to the server for deleting
         if (result.value) {
-          _this3.form.delete('api/user/' + user_id).then(function (data) {
-            Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+          _this4.form.delete('api/user/' + user_id).then(function (data) {
+            Swal.fire('Deleted!', 'User has been deleted.', 'success');
             Fire.$emit('reloadTable');
           }).catch(function () {
-            swal("Failed!", "There was something wrong.", "warning");
+            swal("Delete Failed!", "There was something wrong.", "warning");
           });
         }
       });
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.loadUsers();
     Fire.$on('reloadTable', function () {
-      _this4.loadUsers();
+      _this5.loadUsers();
     }); // setInterval(() => this.loadUsers(), 3000);
   }
 });
@@ -58572,7 +58589,7 @@ var render = function() {
                     staticClass: "modal-title",
                     attrs: { id: "addNewLabel" }
                   },
-                  [_vm._v("Update " + _vm._s(_vm.edit_user.name) + "'s Info")]
+                  [_vm._v("Update " + _vm._s(_vm.form.name) + "'s Info")]
                 ),
                 _vm._v(" "),
                 _vm._m(1)
