@@ -30,7 +30,7 @@
                     <td>
                       <a href="#"><i class="fas fa-edit"></i></a>
                       /
-                      <a href="#"><i class="fas fa-trash"></i></a>
+                      <a href="#" @click="deleteUser(user.id)"><i class="fas fa-trash"></i></a>
                     </td>
                   </tr>
                 </tbody>
@@ -127,23 +127,49 @@
           this.form.post('api/user')
             .then(( data ) => {
               console.log(data);
-              Fire.$emit('afterCreate');
+              Fire.$emit('reloadTable');
               $('#addNew').modal('hide');
               Toast.fire({
                 type: 'success',
                 title: 'User Created in successfully'
               });
               this.$Progress.finish();
-            })
-            .catch((error) => {
+            }).catch((error) => {
               this.$Progress.finish();
               console.log(error);
             });
+        },
+        deleteUser(user_id){
+          Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            //send delete request to the server for deleting
+            if(result.value) {
+              this.form.delete('api/user/' + user_id)
+                .then((data)=> {
+                  Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                  )
+                  Fire.$emit('reloadTable');
+
+                }).catch(()=>{
+                  swal("Failed!", "There was something wrong.", "warning");
+                });
+            }
+          });
         }
       },
       created() {
         this.loadUsers();
-        Fire.$on('afterCreate', () => {
+        Fire.$on('reloadTable', () => {
           this.loadUsers();
         })
         // setInterval(() => this.loadUsers(), 3000);
