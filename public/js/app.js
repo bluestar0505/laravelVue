@@ -2029,7 +2029,7 @@ __webpack_require__.r(__webpack_exports__);
       }).catch(function () {
         _this2.$Progress.fail();
 
-        swal("Profile pdate Failed!", "There was something wrong.", "warning");
+        Swal.fire("Profile pdate Failed!", "There was something wrong.", "warning");
       });
     },
     updatePhoto: function updatePhoto(e) {
@@ -2038,11 +2038,19 @@ __webpack_require__.r(__webpack_exports__);
       var file = e.target.files[0];
       var reader = new FileReader();
 
-      reader.onloadend = function (file) {
-        _this3.form.photo = reader.result; // console.log('Result', reader.result);
-      };
+      if (file['size'] < 2111775) {
+        reader.onloadend = function (file) {
+          _this3.form.photo = reader.result;
+        };
 
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
+      } else {
+        Swal.fire({
+          type: 'error',
+          title: 'Oops...',
+          text: 'You are uploading a large file.(Max size: 2M)'
+        });
+      }
     }
   },
   mounted: function mounted() {
