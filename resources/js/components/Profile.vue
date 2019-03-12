@@ -64,7 +64,7 @@
                 </div>
                 <!-- /.tab-pane -->
                 <div class="tab-pane active show" id="settings">
-                  <form class="form-horizontal" @submit.prevent="updateProfile()">
+                  <form class="form-horizontal">
                     <div class="form-group">
                       <label for="name" class="col-sm-2 control-label">Name</label>
                       <div class="col-sm-10">
@@ -103,7 +103,7 @@
                     </div>
                     <div class="form-group">
                       <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-danger">Update</button>
+                        <button @click.prevent="updateProfile" type="submit" class="btn btn-danger">Update</button>
                       </div>
                     </div>
                   </form>
@@ -138,7 +138,19 @@
         axios.get('api/profile').then(({ data }) => (this.form.fill(data)));
       },
       updateProfile() {
-        console.log("Update Profile!")
+        this.$Progress.start();
+        this.form.put('api/profile/')
+          .then((data)=> {
+            Swal.fire(
+              'Updated!',
+              'Profile has been updated.',
+              'success'
+            );
+            this.$Progress.finish();
+          }).catch(()=>{
+            this.$Progress.fail();
+            swal("Profile pdate Failed!", "There was something wrong.", "warning");
+          });
       },
       updatePhoto(e){
         let file = e.target.files[0];
