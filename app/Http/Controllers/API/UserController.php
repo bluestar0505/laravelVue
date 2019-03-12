@@ -68,16 +68,22 @@ class UserController extends Controller
     public function updateProfile(Request $request)
     {
         $user = auth('api')->user();
-        // $this->validate($request, [
-        //     'name' => 'required|string|max:255',
-        //     'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-        //     'password' => 'sometimes|min:6|confirmed',
-        // ]);
-        // $user->update($request->all());
-        if ($request->photo) {
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'password' => 'sometimes|required|min:6|confirmed',
+        ]);
+        $current_photo = $user->photo;
+        if ($request->photo != $current_photo) {
             $file_name = time() . '.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
             \Image::make($request->photo)->save(public_path('img/profile/' . $file_name));
+            $request->merge(['photo' => $file_name]);
         }
+
+        if ($request->password != '') {
+            $request->merge(['password' => Hash::make($request->password)]);
+        }
+        $user->update($request->all());
         return ['message' => 'User Updated'];
     }
 
@@ -95,9 +101,12 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'password' => 'sometimes|min:6|confirmed',
+            'password' => 'sometimes|required|min:6|confirmed',
         ]);
 
+        if ($request->password != '') {
+            $request->merge(['password' => Hash::make($request['password'])]);
+        }
         $user->update($request->all());
         return ['message' => 'User Updated'];
     }

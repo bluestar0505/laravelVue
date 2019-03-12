@@ -95,10 +95,17 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="password" class="col-sm-4 control-label">Password (leave empty if not changing)</label>
+                      <label for="password" class="col-sm-2 control-label">Password</label>
                       <div class="col-sm-10">
                         <input v-model="form.password" type="password" name="password" id="password" class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
                         <has-error :form="form" field="password"></has-error>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="password" class="col-sm-3 control-label">Confirm Password</label>
+                      <div class="col-sm-10">
+                        <input v-model="form.password_confirmation" type="password" name="password_confirmation" id="password_confirmation" class="form-control" :class="{ 'is-invalid': form.errors.has('password_confirmation') }">
+                        <has-error :form="form" field="password_confirmation"></has-error>
                       </div>
                     </div>
                     <div class="form-group">
@@ -149,7 +156,7 @@
             this.$Progress.finish();
           }).catch(()=>{
             this.$Progress.fail();
-            Swal.fire("Profile pdate Failed!", "There was something wrong.", "warning");
+            Swal.fire("Profile update Failed!", "There was something wrong.", "warning");
           });
       },
       updatePhoto(e){
