@@ -17,7 +17,7 @@
             <h5 class="widget-user-desc">Web Designer</h5>
           </div>
           <div class="widget-user-image">
-            <img class="img-circle" src="/img/profile.png" alt="User Avatar">
+            <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar">
           </div>
           <div class="card-footer">
             <div class="row">
@@ -143,6 +143,9 @@
     methods: {
       loadProfile() {
         axios.get('api/profile').then(({ data }) => (this.form.fill(data)));
+      },
+      getProfilePhoto(){
+          return "img/profile/" + this.form.photo;
       },
       updateProfile() {
         this.$Progress.start();
