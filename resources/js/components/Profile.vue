@@ -13,9 +13,9 @@
           <!-- Add the bg color to the header using any of the bg-* classes -->
           <div class="widget-user-header text-white" style="background-image: url('/img/user-cover.png
           ');">
-            <h3 class="widget-user-username">Darany Khiev</h3>
-            <h5 class="widget-user-desc">Full-Stack Web Developer</h5>
-            <h5 class="widget-user-desc">daranykhiev@gmail.com</h5>
+            <h3 class="widget-user-username">{{this.form.name}}</h3>
+            <h5 class="widget-user-desc">{{this.form.type | upText}}</h5>
+            <h5 class="widget-user-desc">{{this.form.email}}</h5>
           </div>
           <div class="widget-user-image">
             <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar">
