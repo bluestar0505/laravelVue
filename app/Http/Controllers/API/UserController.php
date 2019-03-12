@@ -76,8 +76,13 @@ class UserController extends Controller
         $current_photo = $user->photo;
         if ($request->photo != $current_photo) {
             $file_name = time() . '.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
-            \Image::make($request->photo)->save(public_path('img/profile/' . $file_name));
+            \Image::make($request->photo)->save(public_path('img/profile/') . $file_name);
             $request->merge(['photo' => $file_name]);
+
+            $old_photo = public_path('img/profile/') . $current_photo;
+            if (file_exists($old_photo)) {
+                @unlink($old_photo);
+            }
         }
 
         if (!empty($request->password)) {
