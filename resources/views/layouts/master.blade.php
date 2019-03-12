@@ -132,7 +132,7 @@
             Anything you want
         </div>
         <!-- Default to the left -->
-        <strong>Copyright © 2014-2018 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        <strong> <a href="https://github.com/daranyK">Darany Khiev's Github</a>.</strong> 
       </footer>
     </div>
     <!-- ./wrapper -->
