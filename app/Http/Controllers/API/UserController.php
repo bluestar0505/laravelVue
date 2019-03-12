@@ -80,7 +80,7 @@ class UserController extends Controller
             $request->merge(['photo' => $file_name]);
         }
 
-        if ($request->password != '') {
+        if (!empty($request->password)) {
             $request->merge(['password' => Hash::make($request->password)]);
         }
         $user->update($request->all());
@@ -104,7 +104,7 @@ class UserController extends Controller
             'password' => 'sometimes|required|min:6|confirmed',
         ]);
 
-        if ($request->password != '') {
+        if (!empty($request->password)) {
             $request->merge(['password' => Hash::make($request['password'])]);
         }
         $user->update($request->all());
