@@ -2272,11 +2272,10 @@ __webpack_require__.r(__webpack_exports__);
 
         Fire.$emit('reloadTable');
       }).catch(function () {
-        $('#addNew').modal('hide');
-
+        //$('#addNew').modal('hide');
         _this3.$Progress.fail();
 
-        swal("Update Failed!", "There was something wrong.", "warning");
+        Swal.fire("Update Failed!", "There was something wrong.", "warning");
       }); //console.log("Updating User Data.");
     },
     deleteUser: function deleteUser(user_id) {

@@ -170,9 +170,9 @@
               this.$Progress.finish();
               Fire.$emit('reloadTable');
             }).catch(()=>{
-              $('#addNew').modal('hide');
+              //$('#addNew').modal('hide');
               this.$Progress.fail();
-              swal("Update Failed!", "There was something wrong.", "warning");
+              Swal.fire("Update Failed!", "There was something wrong.", "warning");
             });
           //console.log("Updating User Data.");
         },
