@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+      <div class="row" v-if="!$gate.isAdmin()">
+        <not-found> </not-found>
+      </div>
       <div class="row mt-3" v-if="$gate.isAdmin()">
         <div class="col-md-12">
           <div class="card">
@@ -137,7 +140,7 @@
           this.form.fill(user);
         },
         loadUsers() {
-          if(this.$get.isAdmin()) {
+          if(this.$gate.isAdmin()) {
             axios.get('api/user').then(({ data }) => (this.users = data.data));
           }
         },

@@ -51,7 +51,8 @@
             </div>
             <div class="info">
                 <a href="#" class="d-block">
-                    {{ Auth::user()->name }} <span class="caret"></span>
+                    {{ Auth::user()->name }} 
+                    <p>Role: {{ ucfirst(Auth::user()->type) }} </p>
                 </a>
             </div>
           </div>
@@ -138,7 +139,7 @@
 
     @auth
       <script>
-        window.user = @json(auth()->user())  
+        window.user = @json(auth()->user());
       </script>
     @endauth
     <script src="/js/app.js"></script>
