@@ -51,7 +51,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-12 mt-3">
+        <div class="col-md-12 mt-1">
           <div class="card">
             <div class="card-header p-2">
               <ul class="nav nav-pills">

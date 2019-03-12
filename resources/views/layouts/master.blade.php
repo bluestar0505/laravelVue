@@ -5,7 +5,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       <!-- CSRF Token -->
       <meta name="csrf-token" content="{{ csrf_token() }}">
-      <title>Laravel and VueJs</title>
+      <title>LaraVue</title>
       <link rel="stylesheet" href="/css/app.css">
   </head>
   <body class="sidebar-mini" style="height: auto;" >
@@ -132,7 +132,7 @@
             Anything you want
         </div>
         <!-- Default to the left -->
-        <strong> <a href="https://github.com/daranyK">Darany Khiev's Github</a>.</strong> 
+        <strong> <a href="https://github.com/daranyK" target="_blank">Darany Khiev's Github</a>.</strong> 
       </footer>
     </div>
     <!-- ./wrapper -->

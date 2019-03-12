@@ -2262,7 +2262,7 @@ __webpack_require__.r(__webpack_exports__);
     loadUsers: function loadUsers() {
       var _this = this;
 
-      if (this.$gate.isAdmin()) {
+      if (this.$gate.isAdminOrAuthor()) {
         axios.get('api/user').then(function (_ref) {
           var data = _ref.data;
           return _this.users = data.data;
@@ -60140,7 +60140,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
+        _c("div", { staticClass: "col-md-8 mt-3" }, [
           _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header" }, [_vm._v("Dashboard")]),
             _vm._v(" "),
@@ -60959,7 +60959,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-12 mt-3" }, [
+      _c("div", { staticClass: "col-md-12 mt-1" }, [
         _c("div", { staticClass: "card" }, [
           _vm._m(2),
           _vm._v(" "),
@@ -61394,11 +61394,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    !_vm.$gate.isAdmin()
+    !_vm.$gate.isAdminOrAuthor()
       ? _c("div", { staticClass: "row" }, [_c("not-found")], 1)
       : _vm._e(),
     _vm._v(" "),
-    _vm.$gate.isAdmin()
+    _vm.$gate.isAdminOrAuthor()
       ? _c("div", { staticClass: "row mt-3" }, [
           _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "card" }, [
@@ -77770,6 +77770,11 @@ function () {
     key: "isAdmin",
     value: function isAdmin() {
       return this.user.type === "admin";
+    }
+  }, {
+    key: "isAdminOrAuthor",
+    value: function isAdminOrAuthor() {
+      return this.user.type === "admin" || this.user.type === "author";
     }
   }, {
     key: "isAuthor",
