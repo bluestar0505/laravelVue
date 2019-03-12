@@ -2045,9 +2045,8 @@ __webpack_require__.r(__webpack_exports__);
 
         _this2.$Progress.finish();
       }).catch(function () {
-        _this2.$Progress.fail();
+        _this2.$Progress.fail(); //Swal.fire("Profile update Failed!", "There was something wrong.", "warning");
 
-        Swal.fire("Profile update Failed!", "There was something wrong.", "warning");
       });
     },
     updatePhoto: function updatePhoto(e) {
@@ -2296,7 +2295,7 @@ __webpack_require__.r(__webpack_exports__);
             Swal.fire('Deleted!', 'User has been deleted.', 'success');
             Fire.$emit('reloadTable');
           }).catch(function () {
-            swal("Delete Failed!", "There was something wrong.", "warning");
+            Swal.fire("Delete Failed!", "There was something wrong.", "warning");
           });
         }
       });

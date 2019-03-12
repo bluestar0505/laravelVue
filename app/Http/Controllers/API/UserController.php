@@ -17,6 +17,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
+        // $this->authorize('isAdmin');
     }
 
     /**
@@ -54,8 +55,8 @@ class UserController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'type' => $request['type'],
-            'bio' => $request['bio'],
-            'photo' => $request['photo'],
+            'bio' => $request['bio'] ? $request['bio'] : '',
+            'photo' => $request['photo'] ? $request['photo'] : 'profile.png',
             'password' => Hash::make($request['password']),
         ]);
     }
@@ -124,6 +125,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+
+        $this->authorize('isAdmin');
+
         $user = User::findOrFail($id);
         $user->delete();
         return ['message' => 'User Deleted'];

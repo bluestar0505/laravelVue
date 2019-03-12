@@ -165,7 +165,7 @@
             this.$Progress.finish();
           }).catch(()=>{
             this.$Progress.fail();
-            Swal.fire("Profile update Failed!", "There was something wrong.", "warning");
+            //Swal.fire("Profile update Failed!", "There was something wrong.", "warning");
           });
       },
       updatePhoto(e){

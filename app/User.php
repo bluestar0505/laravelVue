@@ -10,6 +10,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
+    protected $attributes = [
+        'photo' => 'profile.png',
+        'bio' => '',
+    ];
     /**
      * The attributes that are mass assignable.
      *

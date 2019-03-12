@@ -198,7 +198,7 @@
                   Fire.$emit('reloadTable');
 
                 }).catch(()=>{
-                  swal("Delete Failed!", "There was something wrong.", "warning");
+                  Swal.fire("Delete Failed!", "There was something wrong.", "warning");
                 });
             }
           });
