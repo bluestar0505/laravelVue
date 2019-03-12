@@ -57860,7 +57860,7 @@ module.exports = function (css) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-* sweetalert2 v8.2.6
+* sweetalert2 v8.3.0
 * Released under the MIT License.
 */
 (function (global, factory) {
@@ -58282,6 +58282,9 @@ var getCancelButton = function getCancelButton() {
 var getActions = function getActions() {
   return elementByClass(swalClasses.actions);
 };
+var getHeader = function getHeader() {
+  return elementByClass(swalClasses.header);
+};
 var getFooter = function getFooter() {
   return elementByClass(swalClasses.footer);
 };
@@ -58504,8 +58507,18 @@ var renderActions = function renderActions(params) {
 
   confirmButton.className = swalClasses.confirm;
   addClass(confirmButton, params.confirmButtonClass);
+
+  if (params.customClass) {
+    addClass(confirmButton, params.customClass.confirmButton);
+  }
+
   cancelButton.className = swalClasses.cancel;
-  addClass(cancelButton, params.cancelButtonClass); // Buttons styling
+  addClass(cancelButton, params.cancelButtonClass);
+
+  if (params.customClass) {
+    addClass(cancelButton, params.customClass.cancelButton);
+  } // Buttons styling
+
 
   if (params.buttonsStyling) {
     addClass([confirmButton, cancelButton], swalClasses.styled); // Buttons background colors
@@ -58588,6 +58601,10 @@ var renderImage = function renderImage(params) {
     if (params.imageClass) {
       addClass(image, params.imageClass);
     }
+
+    if (params.customClass) {
+      addClass(image, params.customClass.image);
+    }
   } else {
     hide(image);
   }
@@ -58658,14 +58675,14 @@ var isVisible$1 = function isVisible$$1() {
  */
 
 var clickConfirm = function clickConfirm() {
-  return getConfirmButton().click();
+  return getConfirmButton() && getConfirmButton().click();
 };
 /*
  * Global function to click 'Cancel' button
  */
 
 var clickCancel = function clickCancel() {
-  return getCancelButton().click();
+  return getCancelButton() && getCancelButton().click();
 };
 
 function fire() {
@@ -58956,7 +58973,13 @@ var defaultParams = {
   onClose: null,
   scrollbarPadding: true
 };
-var deprecatedParams = [];
+var deprecatedParams = {
+  customContainerClass: 'customClass',
+  confirmButtonClass: 'customClass',
+  cancelButtonClass: 'customClass',
+  imageClass: 'customClass',
+  inputClass: 'customClass'
+};
 var toastIncompatibleParams = ['allowOutsideClick', 'allowEnterKey', 'backdrop', 'focusConfirm', 'focusCancel', 'heightAuto', 'keydownListenerCapture'];
 /**
  * Is valid parameter
@@ -58980,7 +59003,7 @@ var isUpdatableParameter = function isUpdatableParameter(paramName) {
  */
 
 var isDeprecatedParameter = function isDeprecatedParameter(paramName) {
-  return deprecatedParams.indexOf(paramName) !== -1;
+  return deprecatedParams[paramName];
 };
 /**
  * Show relevant warnings for given params
@@ -58999,7 +59022,7 @@ var showWarningsForParams = function showWarningsForParams(params) {
     }
 
     if (isDeprecatedParameter(param)) {
-      warnOnce("The parameter \"".concat(param, "\" is deprecated and will be removed in the next major release."));
+      warnOnce("The parameter \"".concat(param, "\" is deprecated and will be removed in the next major release. Please use \"").concat(isDeprecatedParameter(param), "\" instead."));
     }
   }
 };
@@ -59024,6 +59047,7 @@ var staticMethods = Object.freeze({
 	getActions: getActions,
 	getConfirmButton: getConfirmButton,
 	getCancelButton: getCancelButton,
+	getHeader: getHeader,
 	getFooter: getFooter,
 	getFocusableElements: getFocusableElements,
 	getValidationMessage: getValidationMessage,
@@ -59548,6 +59572,10 @@ function setParameters(params) {
 
   var container = getContainer();
   var closeButton = getCloseButton();
+  var header = getHeader();
+  var title = getTitle();
+  var content = getContent();
+  var actions = getActions();
   var footer = getFooter(); // Title
 
   renderTitle(params); // Content
@@ -59597,11 +59625,18 @@ function setParameters(params) {
     addClass(popup, swalClasses.toast);
   } else {
     addClass(popup, swalClasses.modal);
-  } // Custom Class
+  } // Custom classes
 
 
   if (params.customClass) {
-    addClass(popup, params.customClass);
+    addClass(container, params.customClass.container);
+    addClass(popup, typeof params.customClass === 'string' ? params.customClass : params.customClass.popup);
+    addClass(header, params.customClass.header);
+    addClass(title, params.customClass.title);
+    addClass(closeButton, params.customClass.closeButton);
+    addClass(content, params.customClass.content);
+    addClass(actions, params.customClass.actions);
+    addClass(footer, params.customClass.footer);
   }
 
   if (params.customContainerClass) {
@@ -59819,7 +59854,7 @@ function _main(userParams) {
       switch (e.type) {
         case 'click':
           // Clicked 'confirm'
-          if (targetedConfirm && constructor.isVisible()) {
+          if (targetedConfirm) {
             _this.disableButtons();
 
             if (innerParams.input) {
@@ -59853,7 +59888,7 @@ function _main(userParams) {
               confirm(true);
             } // Clicked 'cancel'
 
-          } else if (targetedCancel && constructor.isVisible()) {
+          } else if (targetedCancel) {
             _this.disableButtons();
 
             dismissWith(constructor.DismissReason.cancel);
@@ -60086,6 +60121,10 @@ function _main(userParams) {
 
       if (innerParams.inputClass) {
         addClass(inputContainer, innerParams.inputClass);
+      }
+
+      if (innerParams.customClass) {
+        addClass(inputContainer, innerParams.customClass.input);
       }
 
       hide(inputContainer);
@@ -60424,7 +60463,7 @@ Object.keys(instanceMethods).forEach(function (key) {
   };
 });
 SweetAlert.DismissReason = DismissReason;
-SweetAlert.version = '8.2.6';
+SweetAlert.version = '8.3.0';
 
 var Swal = SweetAlert;
 Swal.default = Swal;
@@ -79251,6 +79290,9 @@ var routes = [{
 }, {
   path: "/profile",
   component: __webpack_require__(/*! ./components/Profile.vue */ "./resources/js/components/Profile.vue").default
+}, {
+  path: "*",
+  component: __webpack_require__(/*! ./components/NotFound.vue */ "./resources/js/components/NotFound.vue").default
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: "history",
