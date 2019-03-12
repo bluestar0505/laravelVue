@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,3 +16,4 @@ use Illuminate\Http\Request;
 // });
 
 Route::apiResources(['user' => 'API\UserController']);
+Route::get('profile', 'API\UserController@profile');

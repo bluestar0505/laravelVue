@@ -121,6 +121,7 @@
           })
         }
       },
+      
       methods: {
         createModal() {
           this.editMode = false;
@@ -203,6 +204,7 @@
           });
         }
       },
+
       created() {
         this.loadUsers();
         Fire.$on('reloadTable', () => {
