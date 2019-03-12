@@ -2003,6 +2003,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2026,14 +2027,21 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getProfilePhoto: function getProfilePhoto() {
-      return "img/profile/" + this.form.photo;
+      var photo = this.form.photo.length > 200 ? this.form.photo : "img/profile/" + this.form.photo;
+      return photo;
     },
     updateProfile: function updateProfile() {
       var _this2 = this;
 
       this.$Progress.start();
+
+      if (this.form.password == '') {
+        this.form.password = undefined;
+      }
+
       this.form.put('api/profile/').then(function (data) {
         Swal.fire('Updated!', 'Profile has been updated.', 'success');
+        Fire.$emit('reloadProfile');
 
         _this2.$Progress.finish();
       }).catch(function () {
@@ -2067,8 +2075,12 @@ __webpack_require__.r(__webpack_exports__);
     console.log('Component mounted.');
   },
   created: function created() {
+    var _this4 = this;
+
     this.loadProfile();
-    console.log('Component created.');
+    Fire.$on('reloadProfile', function () {
+      _this4.loadProfile();
+    });
   }
 });
 
@@ -60572,10 +60584,16 @@ var staticRenderFns = [
       },
       [
         _c("h3", { staticClass: "widget-user-username" }, [
-          _vm._v("Elizabeth Pierce")
+          _vm._v("Darany Khiev")
         ]),
         _vm._v(" "),
-        _c("h5", { staticClass: "widget-user-desc" }, [_vm._v("Web Designer")])
+        _c("h5", { staticClass: "widget-user-desc" }, [
+          _vm._v("Full-Stack Web Developer")
+        ]),
+        _vm._v(" "),
+        _c("h5", { staticClass: "widget-user-desc" }, [
+          _vm._v("daranykhiev@gmail.com")
+        ])
       ]
     )
   },

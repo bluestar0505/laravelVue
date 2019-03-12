@@ -13,8 +13,9 @@
           <!-- Add the bg color to the header using any of the bg-* classes -->
           <div class="widget-user-header text-white" style="background-image: url('/img/user-cover.png
           ');">
-            <h3 class="widget-user-username">Elizabeth Pierce</h3>
-            <h5 class="widget-user-desc">Web Designer</h5>
+            <h3 class="widget-user-username">Darany Khiev</h3>
+            <h5 class="widget-user-desc">Full-Stack Web Developer</h5>
+            <h5 class="widget-user-desc">daranykhiev@gmail.com</h5>
           </div>
           <div class="widget-user-image">
             <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar">
@@ -145,10 +146,14 @@
         axios.get('api/profile').then(({ data }) => (this.form.fill(data)));
       },
       getProfilePhoto(){
-          return "img/profile/" + this.form.photo;
+        let photo = (this.form.photo.length > 200) ? this.form.photo : "img/profile/" + this.form.photo;
+        return photo;
       },
       updateProfile() {
         this.$Progress.start();
+        if(this.form.password == '') {
+          this.form.password = undefined;
+        }
         this.form.put('api/profile/')
           .then((data)=> {
             Swal.fire(
@@ -156,6 +161,7 @@
               'Profile has been updated.',
               'success'
             );
+            Fire.$emit('reloadProfile');
             this.$Progress.finish();
           }).catch(()=>{
             this.$Progress.fail();
@@ -183,8 +189,10 @@
         console.log('Component mounted.')
     },
     created () {
+      this.loadProfile();
+      Fire.$on('reloadProfile', () => {
         this.loadProfile();
-        console.log('Component created.')
+      })
     }
   }
 </script>
