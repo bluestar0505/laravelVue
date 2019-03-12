@@ -86,16 +86,14 @@
                         <has-error :form="form" field="bio"></has-error>
                       </div>
                     </div>
-                    
                     <div class="form-group">
                       <label for="photo" class="col-sm-4 control-label">Profile Photo</label>
                       <div class="col-sm-10">
-                        <input type="file" name="photo" id="photo"  >
+                        <input type="file" @change="updatePhoto" name="photo" id="photo"  >
                         <!--<input v-model="form.photo" type="file" name="photo" id="photo" class="form-control" :class="{ 'is-invalid': form.errors.has('profile') }">
                         <has-error :form="form" field="photo"></has-error>-->
                       </div>
                     </div>
-
                     <div class="form-group">
                       <label for="password" class="col-sm-4 control-label">Password (leave empty if not changing)</label>
                       <div class="col-sm-10">
@@ -103,7 +101,6 @@
                         <has-error :form="form" field="password"></has-error>
                       </div>
                     </div>
-                    
                     <div class="form-group">
                       <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-danger">Update</button>
@@ -142,6 +139,15 @@
       },
       updateProfile() {
         console.log("Update Profile!")
+      },
+      updatePhoto(e){
+        let file = e.target.files[0];
+        let reader = new FileReader();
+        reader.onloadend = (file) => {
+          this.form.photo = reader.result;
+          // console.log('Result', reader.result);
+        }
+        reader.readAsDataURL(file);
       }
     },
     mounted() {
