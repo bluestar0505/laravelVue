@@ -66,6 +66,7 @@
                   <router-link to="/dashboard" class="nav-link"><i class="nav-icon fas fa-tachometer-alt"></i><p>Dashboad</p></router-link>
                 </li>
 
+                @can('isAdmin')
                 <li class="nav-item has-treeview menu-close">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-cog"></i>
@@ -83,8 +84,7 @@
                         </li>
                     </ul>
                 </li>
-                
-                @can('isAdmin')
+
                 <li class="nav-item">
                   <router-link to="/developer" class="nav-link"><i class="nav-icon fas fa-cogs"></i><p>Developer</p></router-link>
                 </li>
@@ -135,6 +135,12 @@
       </footer>
     </div>
     <!-- ./wrapper -->
+
+    @auth
+      <script>
+        window.user = @json(auth()->user())  
+      </script>
+    @endauth
     <script src="/js/app.js"></script>
   </body>
 </html>

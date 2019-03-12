@@ -24,6 +24,9 @@ Vue.use(VueProgressBar, {
     height: "3px"
 });
 
+import Gate from "./Gate";
+Vue.prototype.$gate = new Gate(window.user);
+
 import Swal from "sweetalert2";
 window.Swal = Swal;
 const Toast = Swal.mixin({
