@@ -123,8 +123,11 @@ const app = new Vue({
         search: ""
     },
     methods: {
-        searchHit() {
+        // searchHit() {
+        //     Fire.$emit("searching");
+        // }
+        searchHit: _.debounce(() => {
             Fire.$emit("searching");
-        }
+        }, 1000)
     }
 });

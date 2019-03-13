@@ -79342,9 +79342,12 @@ var app = new Vue({
     search: ""
   },
   methods: {
-    searchHit: function searchHit() {
+    // searchHit() {
+    //     Fire.$emit("searching");
+    // }
+    searchHit: _.debounce(function () {
       Fire.$emit("searching");
-    }
+    }, 1000)
   }
 });
 
