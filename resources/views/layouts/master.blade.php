@@ -5,7 +5,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       <!-- CSRF Token -->
       <meta name="csrf-token" content="{{ csrf_token() }}">
-      <title>LaraVue</title>
+      <title>{{ config('app.name') }}</title>
       <link rel="stylesheet" href="/css/app.css">
   </head>
   <body class="sidebar-mini" style="height: auto;" >
@@ -93,6 +93,10 @@
 
                 <li class="nav-item">
                   <router-link to="/profile"  class="nav-link"><i class="nav-icon fas fa-user"></i><p>Profile</p></router-link>
+                </li>
+
+                <li class="nav-item">
+                  <router-link to="/invoice"  class="nav-link"><i class="nav-icon fas fa-user"></i><p>Invoice</p></router-link>
                 </li>
 
                 <li class="nav-item">

@@ -59,6 +59,10 @@ const routes = [
         component: require("./components/Profile.vue").default
     },
     {
+        path: "/invoice",
+        component: require("./components/Invoice.vue").default
+    },
+    {
         path: "*",
         component: require("./components/NotFound.vue").default
     }
