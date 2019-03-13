@@ -219,10 +219,20 @@
       },
 
       created() {
+        Fire.$on('searching', () => {
+          let query = this.$parent.search;
+          if (query !== '') {
+            axios.get('api/searchUser?q=' + query).then((data)=> {
+              this.users = data.data;
+            }).catch(()=>{
+              
+            });
+          }
+        });
         this.loadUsers();
         Fire.$on('reloadTable', () => {
           this.loadUsers();
-        })
+        });
         // setInterval(() => this.loadUsers(), 3000);
       }
     }
