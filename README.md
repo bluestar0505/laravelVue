@@ -40,8 +40,14 @@ It's just like any other Laravel project. Basically here is how you use it for y
 * Run ` php artisan key:generate` to generate the app key
 * Run ` npm install ` 
 * Run ` php artisan migrate ` 
+* Run ` composer dump-autoload ` 
 * Run ` php artisan db:seed `
-* Done !!! Enjoy Customizing and building awesome app 
+* Run ` php artisan passport:keys `
+
+## Run Service
+
+* Run ` npm run watch `
+* Run ` php artisan serve `
 
 ## Login
 * Login ID: ` admin@me.com `
