@@ -1,8 +1,13 @@
 # laraVue
 It's a Admin Panel Stater For Laravel and Vue.js. <br>
+
 <b> This repo is based on practical web application development course on youtube. </b><br> 
 https://www.youtube.com/playlist?list=PLB4AdipoHpxaHDLIaMdtro1eXnQtl_UvE<br>
+
 And I added something a bit change.
+
+Becase It has some issues I hope you will update this source by branch.
+I'm writing issues that it contain yet.
 
 <b> Here are the things you will learn in this series and what the repo include out of the box: </b>
 
@@ -42,6 +47,9 @@ It's just like any other Laravel project. Basically here is how you use it for y
 * Login ID: ` admin@me.com `
 * Password: ` admin `
 
+## Issues
+
+* 
 
 
 
@@ -50,5 +58,5 @@ It's just like any other Laravel project. Basically here is how you use it for y
 Thanks to Hujjat Nazari.
 I like his course on Youtube.
 
-https://github.com/Hujjat/laravStart.git
+https://github.com/Hujjat/laravStart.git <br>
 https://www.youtube.com/playlist?list=PLB4AdipoHpxaHDLIaMdtro1eXnQtl_UvE
