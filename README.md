@@ -59,7 +59,7 @@ It's just like any other Laravel project. Basically here is how you use it for y
 1. After update your profile photo don't change avatar on Sidebar menu.
 2. When open profile at first don't show default profime image on Profile page
 
-* Select Empty User Role
+* Select Empty User Role <br>
 When you update with Empty User Role ("Select User Role") on Update User Dialog, you can show "Update Failed!" alert.But can't see error message beside of "Type" select. For Example "The Type field is required."
 
 * Change Invoice Menu Icon
