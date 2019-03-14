@@ -62,6 +62,8 @@ It's just like any other Laravel project. Basically here is how you use it for y
 * Select Empty User Role
 When you update with Empty User Role ("Select User Role") on Update User Dialog, you can show "Update Failed!" alert.But can't see error message beside of "Type" select. For Example "The Type field is required."
 
+* Change Invoice Menu Icon
+
 
 ## Tutorial Description 
 
