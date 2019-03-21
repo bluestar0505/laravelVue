@@ -79728,9 +79728,9 @@ function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vform */ "./node_modules/vform/dist/vform.common.js");
 /* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vform__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vue_progressbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-progressbar */ "./node_modules/vue-progressbar/dist/vue-progressbar.js");
@@ -79747,8 +79747,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
+Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 window.Form = vform__WEBPACK_IMPORTED_MODULE_2__["Form"];
 Vue.component(vform__WEBPACK_IMPORTED_MODULE_2__["HasError"].name, vform__WEBPACK_IMPORTED_MODULE_2__["HasError"]);
@@ -79791,7 +79791,7 @@ var routes = [{
   path: "*",
   component: __webpack_require__(/*! ./components/NotFound.vue */ "./resources/js/components/NotFound.vue").default
 }];
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   mode: "history",
   routes: routes // short for `routes: routes`
 
@@ -79800,7 +79800,7 @@ Vue.filter("upText", function (text) {
   return text.charAt(0).toUpperCase() + text.slice(1);
 });
 Vue.filter("myDate", function (date) {
-  return moment__WEBPACK_IMPORTED_MODULE_0___default()(date).format("MMMM Do YYYY");
+  return moment__WEBPACK_IMPORTED_MODULE_1___default()(date).format("MMMM Do YYYY");
 });
 /**
  * The following block of code may be used to automatically register your
@@ -79826,8 +79826,13 @@ Vue.component("not-found", __webpack_require__(/*! ./components/NotFound.vue */ 
 var app = new Vue({
   el: "#app",
   router: router,
-  data: {
-    search: ""
+  // data: {
+  //     search: ""
+  // },
+  data: function data() {
+    return {
+      search: ""
+    };
   },
   methods: {
     // searchHit() {

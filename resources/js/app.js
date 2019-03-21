@@ -7,10 +7,10 @@
 require("./bootstrap");
 
 window.Vue = require("vue");
-import moment from "moment";
 import VueRouter from "vue-router";
-
 Vue.use(VueRouter);
+
+import moment from "moment";
 
 import { Form, HasError, AlertError } from "vform";
 window.Form = Form;
@@ -123,8 +123,13 @@ Vue.component("not-found", require("./components/NotFound.vue").default);
 const app = new Vue({
     el: "#app",
     router,
-    data: {
-        search: ""
+    // data: {
+    //     search: ""
+    // },
+    data() {
+        return {
+            search: ""
+        };
     },
     methods: {
         // searchHit() {
